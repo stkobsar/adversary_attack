@@ -6,10 +6,9 @@ import os
 import argparse
 import adversary_attack.functions.get_image as gt
 import adversary_attack.functions.get_prediction as gp
+import adversary_attack.functions.adversary_attack as aa
 from PIL import Image
-from keras.applications.inception_v3 import InceptionV3, decode_predictions
 from keras_preprocessing import image
-from keras import backend as K
 
 
 def parse_argse():
@@ -25,15 +24,22 @@ def main(image_path):
     image_relative_path = image_path
     image_path = os.path.join(adv_dir, image_relative_path)
     image_processed = gt.get_image(image_path)
-    image_pred = gp.get_prediction(image_processed)
-    return image_pred
+
+    image_pred_matrix = gp.get_prediction_numeric(image_processed)
+
+
+    return image_processed
 
 
 if __name__ == "__main__":
 
     image_path = parse_argse()
-    image_pred = main(image_path)
-    print(image_pred)
+    image_processed = main(image_path)
+
+    aa.adversary(image_processed)
+
+
+
 
 
 
