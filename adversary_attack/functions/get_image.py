@@ -25,6 +25,13 @@ def normalize_matrix_image(matrix_image):
     matrix_image_norm = arr / np.abs(arr).max(axis=0)
     return matrix_image_norm
 
+def denormalize_matrix_image(matrix_image_norm):
+    den_arr = matrix_image_norm + matrix_image_norm.mean(axis=0)
+
+    matrix_denormalized = den_arr / np.abs(den_arr)
+    return matrix_denormalized
+
+
 
 def image_reshaped(image):
     """

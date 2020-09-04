@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import argparse
+import numpy as np
+import matplotlib.pyplot as plt
 import adversary_attack.functions.get_image as gt
 import adversary_attack.functions.get_prediction as gp
 import adversary_attack.functions.adversary_attack as aa
@@ -36,7 +38,17 @@ if __name__ == "__main__":
     image_path = parse_argse()
     image_processed = main(image_path)
 
-    aa.adversary(image_processed)
+    image_pred_copy = aa.adversary(image_processed)
+    #image_denormalized = gt.denormalize_matrix_image(image_pred_copy)
+
+
+
+    ########## Show image with moved pixels ###############
+
+    plt.imshow(image_denormalized[0].astype(np.uint8))
+    plt.savefig("test_1")
+
+
 
 
 
