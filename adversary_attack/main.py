@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 import adversary_attack.functions.get_image as gt
 import adversary_attack.functions.get_prediction as gp
 import adversary_attack.functions.adversary_image as aa
-import adversary_attack.functions.get_class_adv_pred as gc
 from PIL import Image
 from keras_preprocessing import image
 
@@ -48,7 +47,8 @@ if __name__ == "__main__":
     image_denormalized = gt.denormalize_matrix_image(image_pred_copy)
     adversary_image = plot_image_adv(image_denormalized)
 
-
+    image_class = gp.get_prediction_class(adversary_image)
+    print(image_class)
 
 
     ########## Show image with moved pixels ###############
